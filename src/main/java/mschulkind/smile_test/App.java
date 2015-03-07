@@ -3,6 +3,7 @@ package mschulkind.smile_test;
 import java.io.*;
 import smile.data.parser.*;
 import smile.data.*;
+import smile.regression.*;
 
 public class App {
     public static void main( String[] args ) {
@@ -12,9 +13,13 @@ public class App {
             parser.setDelimiter(",");
             parser.setResponseIndex(new NumericAttribute("MEDV"), 13);
 
-            Dataset dataset = parser.parse("housing.csv");
+            AttributeDataset dataset = parser.parse("housing.csv");
 
-            System.out.println("FOO!");
+            double[][] x = dataset.toArray(new double[dataset.size()][]);
+            double[] y = dataset.toArray(new double[dataset.size()]);
+
+            RandomForest forest = 
+                new RandomForest(dataset.attributes(), x, y, 200);
         } catch (Exception e) {
             System.out.println("error");
         }
