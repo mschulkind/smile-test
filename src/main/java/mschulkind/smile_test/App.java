@@ -18,8 +18,10 @@ public class App {
             double[][] x = dataset.toArray(new double[dataset.size()][]);
             double[] y = dataset.toArray(new double[dataset.size()]);
 
+            System.out.println("before generating forest");
             RandomForest forest = 
                 new RandomForest(dataset.attributes(), x, y, 200);
+            System.out.println("after generating forest");
         } catch (Exception e) {
             System.out.println("error");
         }
